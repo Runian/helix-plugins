@@ -147,10 +147,11 @@ function ENT:Setup( client )
 	-- Checks:
 	if( !self:GetVars() ) then
 		return "This entity does not have any variables.";
-	elseif( !CAMI.PlayerHasAccess( client, "Scavenging: Setup", nil ) ) then 
-		return "You don't have permission to perform setup.";
 	end
 	if( !self:GetConfigured() ) then
+		if( !CAMI.PlayerHasAccess( client, "Scavenging: Setup", nil ) ) then 
+			return "You don't have permission to perform setup.";
+		end
 		-- Getting Names:
 		local tabl = {};
 		for name, _ in pairs( ix.Scavenging.InformationTables ) do
