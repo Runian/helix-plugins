@@ -124,6 +124,15 @@ ix.Scavenging.SetInventoryTable = PLUGIN.SetInventoryTable;
 PLUGIN.AddInformationTable = PLUGIN.SetInventoryTable;
 ix.Scavenging.AddInformationTable = PLUGIN.AddInformationTable;
 
+--[[
+	commit 9efc4b6 added an inventory library which seperates and renames some functions.
+	This happened on 1/1/21. This is only for older helix bases.
+]]
+ix.inventory = ix.inventory or {};
+if( !ix.inventory.Register ) then
+	ix.inventory.Register = ix.item.RegisterInv;
+end
+
 -- Registering Inventories:
 do
     for name, info in pairs( ix.Scavenging.InformationTables ) do
