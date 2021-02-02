@@ -100,7 +100,8 @@ ix.CCRedone[3] = { -- Factions & Whitelisting (PANEL #1: 'faction')
 			end
 		end
 
-		self.Factions.PanelRight:SizeToContents();
+		print( "hello?")
+		self.Factions.PanelLeft:SizeToContents();
 
 		if( self.bInitialPopulate ) then return end;
 		local lastSelected;
@@ -118,7 +119,7 @@ ix.CCRedone[3] = { -- Factions & Whitelisting (PANEL #1: 'faction')
 
 		for _, v in SortedPairs( ix.faction.teams ) do
 			if( ix.faction.HasWhitelist( v.index ) ) then
-				local button = self.Factions.PanelRight:Add( "ixMenuSelectionButton" );
+				local button = self.Factions.PanelLeft:Add( "ixMenuSelectionButton" );
 				button:SetBackgroundColor( v.color or color_white );
 				button:SetText( L( v.name ):utf8upper() );
 				button:SizeToContents();
@@ -160,7 +161,7 @@ ix.CCRedone[4] = { -- Description (PANEL #2: 'description')
 		self.Description.PanelLeft:Dock( LEFT );
 		self.Description.PanelLeft:SetSize( HalfWidth, HalfHeight );
 	
-		self.Description.Back = self.Description:Add( "ixMenuButton" );
+		self.Description.Back = self.Description.PanelLeft:Add( "ixMenuButton" );
 		self.Description.Back:SetText( "return" );
 		self.Description.Back:SetContentAlignment( 4 );
 		self.Description.Back:SizeToContents();
@@ -260,7 +261,7 @@ ix.CCRedone[5] = { -- Attributes (PANEL #3: 'attributes')
 		end
 	end
 };
-ix.CCRedone[998] = { -- Hide progress bar if it's the only segment.
+ix.CCRedone[6] = { -- Hide progress bar if it's the only segment.
 	["CharMenuPopulate"] = function( self )
 		if( self.bInitialPopulate ) then return end;
 
@@ -270,12 +271,15 @@ ix.CCRedone[998] = { -- Hide progress bar if it's the only segment.
 		end
 	end
 };
-ix.CCRedone[999] = { -- Populates all panels according to character variables.
+ix.CCRedone[7] = { -- Populates all panels according to character variables.
 	["CharMenuPopulate"] = function( self )
 		local zPos = 1;
+		print( "wtf")
 		-- set up character vars
 		for k, v in SortedPairsByMemberValue( ix.char.vars, "index" ) do
 			if( !v.bNoDisplay and k != "__SortedIndex" ) then
+				print( k )
+				print( v.category )
 				local container = self:GetContainerPanel( v.category or "description" );
 				local panel;
 				if( v.ShouldDisplay and v:ShouldDisplay( container, self.Payload ) == false ) then continue end;
@@ -401,7 +405,8 @@ hook.Add( "CharMenuPostInitalize", "CharMenuRedonePostInitalize", function( self
 end );
 
 hook.Add( "CharMenuPopulate", "CharMenuRedonePopulate", function( self )
-	for _, context in ipairs( ix.CCRedone ) do
+	for num, context in ipairs( ix.CCRedone ) do
+		print( num )
 		for hookname, func in pairs( context ) do
 			if( hookname != "CharMenuPopulate" ) then continue end;
 			func( self );
@@ -420,11 +425,10 @@ end );
 
 hook.Add( "CharMenuGetContainerPanel", "CharMenuRedoneGetContainerPanel", function( self, name )
 	if( name == "faction" ) then
-		return self.Factions.Panel;
+		return self.Factions.PanelLeft;
 	elseif( name == "description" ) then
 		return self.Description.PanelRight;
 	elseif( name == "attributes" ) then
 		return self.Attributes.PanelRight;
 	end
-	return self.Description.PanelRight;
 end );
