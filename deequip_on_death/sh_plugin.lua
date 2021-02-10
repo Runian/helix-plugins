@@ -1,4 +1,4 @@
-PLUGIN.name = "Unequip on Death"; -- Technically misleading name; should be 'Unequip after Death, but before Death'.
+PLUGIN.name = "Unequip on Death"; -- Technically misleading name; should be 'Unequip after Death, but before Respawning'.
 PLUGIN.author = "Rune Knight";
 PLUGIN.description = "Automatically de-equips items during a period after death and before (fully) respawning.";
 PLUGIN.license = [[Copyright 2021 Rune Knight
