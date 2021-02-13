@@ -113,8 +113,7 @@ else
 		
 		local n = data.nicename;
 		local u = data.spawnname;
-		local cami = data.cami;
-
+		
 		local icon = vgui.Create( "SpawnIcon", p );
 		icon:SetWide( 64 );
 		icon:SetTall( 64 );
