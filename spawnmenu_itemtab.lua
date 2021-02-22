@@ -22,7 +22,7 @@ function PLUGIN:GetExpectedIcon( s )
 		["Clothing"] = "icon16/user_suit.png",
 		["Consumables"] = "icon16/pill.png",
 		["Medical"] = "icon16/heart.png",
-		["Miscellaneous"] = "icon16/error.png",
+		["misc"] = "icon16/error.png",
 		["Permits"] = "icon16/note.png",
 		["Storage"] = "icon16/package.png",
 		["Weapons"] = "icon16/gun.png",
@@ -65,7 +65,7 @@ else
 	
 		local l = {};
 		for uid, i in pairs( ix.item.list ) do
-			local c = L( i.category ); -- Hopefully it translate correctly.
+			local c = i.category;
 			l[c] = l[c] or {};
 			table.insert( l[c], i );
 		end
@@ -73,7 +73,7 @@ else
 		for c, i in SortedPairs( l ) do
 
 			local icon16 = PLUGIN:GetExpectedIcon( c );
-			local node = t:AddNode( c, icon16 )
+			local node = t:AddNode( L(c), icon16 )
 			node.DoClick = function( self )
 				
 				if( self.PropPanel and IsValid( self.PropPanel ) ) then 
@@ -127,7 +127,7 @@ else
 
 		icon.DoClick = function( s ) 
 			surface.PlaySound( "ui/buttonclickrelease.wav" );
-			if( !CAMI.PlayerHasAccess( client, "Spawn Menu: Items - Spawning", nil ) ) then 
+			if( !CAMI.PlayerHasAccess( LocalPlayer(), "Spawn Menu: Items - Spawning", nil ) ) then 
 				return;
 			end
 
