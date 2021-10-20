@@ -1,5 +1,6 @@
 # "Help! I'm getting errors!"
-## 1: My errors are about inventories and how it doesn't exist.
-Update your helix base to the latest. This plugin uses newer functions that are from the latest helix base.
-## 2: My errors are about nil values.
-Your configuration, defined, or user-inputted information related to the plugin is incomplete. Complete it.
+### "I changed a configuration and getting errors that I didn't have before!"
+Check for typos.
+### "I tried everything above and it still doesn't work!"
+Try the plugin in a brand new helix gamemode. If you're no longer getting errors, then something in your old schema was breaking something.
+If you're still getting errors after this, then contact me.
